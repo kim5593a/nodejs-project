@@ -1,4 +1,4 @@
-# nodeJS-project
+# NodeJS-project
 
 biztov_gib_api -카카오 송금 키보드(NodeJS Ver 16.13.2)
 ------------------
