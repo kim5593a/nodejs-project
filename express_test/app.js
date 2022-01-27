@@ -2,12 +2,20 @@
 
 const express =require('express'); //express 패키지 import
 const path=require('path');//경로 패키지 import
-
-//Server 세팅
+const morgan =require('morgan'); //morgan 패키지 import
+const cookieParser=require('cookie-parser');//cookieParser 패키지 import
+//---------------------------------------------------------------
+//---------------------------------------------------------------
+//[Server 세팅]
 const app=express();//express obj init
 app.set('port',3000);
-
-//Server 미들웨어 설정
+app.use(morgan('dev'));//개발전용 Log 패키지 모듈
+app.use(cookieParser());//클라이언트 쿠키 받아오는 패키지 모듈
+app.use(express.json());//JSON 패키지 모듈(JSON 파싱)
+app.use(express.urlencoded({extended:true}));//URL Encoding  패키지 모듈(Form 파싱)
+//---------------------------------------------------------------
+//---------------------------------------------------------------
+//[Server 미들웨어 설정]
 //Server에서 어떤 라우터가 전달되도 실행 Code
 app.use((req,res,next)=>{
     console.log('모든 요청에서 실행하는 미들웨어');
@@ -21,10 +29,22 @@ app.use('/get',(req,res,next)=>{
     next();
 });
 //---------------------------------------------------------------
-
+//---------------------------------------------------------------
 //defult reqest
 //http://localhost:3000/
-app.get('/get',(req,res)=>{
+app.get('/test',(req,res)=>{
+    req.cookies//사용자 쿠키 받아오기
+    //쿠키 만들어서 보내기
+    res.cookie('name',encodeURIComponent(name),{
+        expires:new Date(),
+        httpOnly:true,
+        path:'/',
+    })
+    //쿠키 제거
+    res.clearCookie('name',encodeURIComponent(name),{
+        httpOnly:true,
+        path:'/',
+    })
     res.send('get express');
 });
 app.post('/post',(req,res)=>{
