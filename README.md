@@ -2,10 +2,9 @@
 
 biztov_gib_api
 ------------------
-* NodeJS Ver 16.13.2
-* Express Ver ...
-* npm ver 8.3.0
-* express ver 4.17.2
+NodeJS Ver 16.13.2
+npm Ver 8.3.0
+express Ver 4.17.2
 
 NodeJS Project 패키지 설치
 
